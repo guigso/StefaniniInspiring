@@ -1,6 +1,7 @@
 console.log('Yet another Hello world');
 
 var map = null;
+var markers = [];
 
 placesOfInterest = [
     { name: 'Charme da paulista', lat: -23.562172, lng: -46.655794 },
@@ -34,27 +35,46 @@ const customIconSelected = {
     strokeWeight: 3
 };
 
-function addMarker(marker) {
+
+function addMarker(marker, i) {
     var marker = new google.maps.Marker({
         map: map,
         position: new google.maps.LatLng(marker.lat, marker.lng),
         icon: customIcon,
-        title: marker.name
+        title: marker.name,
+        id: i,
     });
+    markers.push(marker);
+
     var infowindow = new google.maps.InfoWindow({
         content: marker.title
     });
-
+    
+    function hideAllInfoWindows(map) {
+        markers.forEach(function (marker) {
+            infowindow.close(map, marker);
+        });
+    }
+    infowindow.addListener('closeclick',function(){
+       marker.setIcon(customIcon)
+    });
     marker.addListener('click', function () {
         if (marker.getIcon().fillColor == '#FFF') {
-            marker.setIcon(customIcon);
+            hideAllInfoWindows(map)
+            marker.setIcon(customIcon)
         }
         else {
             marker.setIcon(customIconSelected);
+            markerId = marker.id;
             infowindow.open(map, marker);
+
         }
     });
+
+
 }
+
+
 
 function initMap() {
     var mapOptions = {
@@ -75,11 +95,56 @@ function initMap() {
     };
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    //Criar botão de Centralizar
+    var centerControlDiv = document.createElement('div');
+    var centerControl = new CenterControl(centerControlDiv, map);
+    centerControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
 
     //Adicionando o primeiro marcador como exemplo
     placesOfInterest.forEach((element, i) => {
-        addMarker(placesOfInterest[i]);
+        addMarker(placesOfInterest[i], i);
     });
 
 
+    function CenterControl(controlDiv, map) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'User Location';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Center Map';
+        controlUI.appendChild(controlText);
+
+        controlUI.addEventListener('click', function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    map.setCenter(initialLocation);
+                    userLocation = { 'name': 'User Location', lat: position.coords.latitude, lng: position.coords.longitude };
+                    console.log(position.coords.latitude, position.coords.longitude);
+                    addMarker(userLocation);
+                });
+
+            }
+
+        });
+
+    }
 }
