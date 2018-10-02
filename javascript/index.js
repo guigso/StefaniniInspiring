@@ -41,8 +41,18 @@ function addMarker(marker) {
         icon: customIcon,
         title: marker.name
     });
+    var infowindow = new google.maps.InfoWindow({
+        content: marker.title
+    });
+
     marker.addListener('click', function () {
-        marker.setIcon(customIconSelected);
+        if (marker.getIcon().fillColor == '#FFF') {
+            marker.setIcon(customIcon);
+        }
+        else {
+            marker.setIcon(customIconSelected);
+            infowindow.open(map, marker);
+        }
     });
 }
 
