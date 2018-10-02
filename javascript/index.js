@@ -60,21 +60,17 @@ function addMarker(marker, i) {
     });
     marker.addListener('click', function () {
         if (marker.getIcon().fillColor == '#FFF') {
-            hideAllInfoWindows(map)
-            marker.setIcon(customIcon)
+            hideAllInfoWindows(map);
+            marker.setIcon(customIcon);
         }
         else {
             marker.setIcon(customIconSelected);
             markerId = marker.id;
-            infowindow.open(map, marker);
-
+            hideAllInfoWindows(map);
+            infowindow.open(map, marker);        
         }
     });
-
-
 }
-
-
 
 function initMap() {
     var mapOptions = {
