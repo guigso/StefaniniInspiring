@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['search.page.scss']
 })
 export class SearchPage {
-  searchInput : string;
+  searchInput: string;
   results = [];
 
   ngOnInit() {

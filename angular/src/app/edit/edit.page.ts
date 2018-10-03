@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { legends } from '../names/nameslist';
 
 @Component({
   selector: 'app-edit',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['edit.page.scss']
 })
 export class EditPage {
-
+  legends: Array<string> = legends;
   constructor() {
     
   }

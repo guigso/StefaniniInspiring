@@ -22,4 +22,4 @@ export const legends = [
     'John Paul Jones',
     'Freddie Mercury'
 
-]
+];
