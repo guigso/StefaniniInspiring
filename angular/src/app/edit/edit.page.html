@@ -10,7 +10,8 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6" offset="3">
-        <ion-list reorder="true">
+        <ion-list>
+          <ion-reorder-group (ionItemReorder)="reorderItems($event)"disabled="false">
           <ion-list-header>
             <ion-label>List of Names</ion-label>
           </ion-list-header>
@@ -18,9 +19,12 @@
             <ion-label>
               {{legend}}
             </ion-label>
-            <button ion-button outline item-end color="secondary" (click)="buttonClick()">Edit</button>
+            <ion-reorder></ion-reorder>
+            <ion-button  outline item-end color="secondary" (click)="buttonClick()">Edit</ion-button>
           </ion-item>
+        </ion-reorder-group>
         </ion-list>
+        <ion-button  full color="secondary" (click)="save()">save</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
