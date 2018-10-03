@@ -37,39 +37,40 @@ const customIconSelected = {
 
 
 function addMarker(marker, i) {
+    var infowindow = new google.maps.InfoWindow({
+        content: marker.name
+    });
+
     var marker = new google.maps.Marker({
         map: map,
         position: new google.maps.LatLng(marker.lat, marker.lng),
         icon: customIcon,
         title: marker.name,
         id: i,
+        infowindow: infowindow
     });
     markers.push(marker);
 
-    var infowindow = new google.maps.InfoWindow({
-        content: marker.title
-    });
-    
-    function hideAllInfoWindows(map) {
-        markers.forEach(function (marker) {
-            infowindow.close(map, marker);
-        });
-    }
-    infowindow.addListener('closeclick',function(){
-       marker.setIcon(customIcon)
+    infowindow.addListener('closeclick', function () {
+        marker.setIcon(customIcon)
     });
     marker.addListener('click', function () {
-        if (marker.getIcon().fillColor == '#FFF') {
-            hideAllInfoWindows(map);
-            marker.setIcon(customIcon);
+        if (this.getIcon().fillColor == '#FFF') {
+            this.setIcon(customIcon);
+            infowindow.close(map,this);
         }
         else {
-            marker.setIcon(customIconSelected);
-            markerId = marker.id;
             hideAllInfoWindows(map);
-            infowindow.open(map, marker);        
+            this.setIcon(customIconSelected);
+            infowindow.open(map, this);
         }
     });
+    function hideAllInfoWindows(map) {
+        markers.forEach(function (marker) {
+            marker.infowindow.close(map, marker);
+            marker.setIcon(customIcon);
+        });
+    }
 }
 
 function initMap() {
@@ -91,13 +92,13 @@ function initMap() {
     };
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    //Criar botão de Centralizar
+    //Criando botão customizado
     var centerControlDiv = document.createElement('div');
     var centerControl = new CenterControl(centerControlDiv, map);
     centerControlDiv.index = 1;
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
 
-    //Adicionando o primeiro marcador como exemplo
+    //Adicionando os marcadores
     placesOfInterest.forEach((element, i) => {
         addMarker(placesOfInterest[i], i);
     });
@@ -105,7 +106,7 @@ function initMap() {
 
     function CenterControl(controlDiv, map) {
 
-        // Set CSS for the control border.
+        // CSS do botão customizado
         var controlUI = document.createElement('div');
         controlUI.style.backgroundColor = '#fff';
         controlUI.style.border = '2px solid #fff';
@@ -117,7 +118,7 @@ function initMap() {
         controlUI.title = 'User Location';
         controlDiv.appendChild(controlUI);
 
-        // Set CSS for the control interior.
+        // CSS do interior do botão
         var controlText = document.createElement('div');
         controlText.style.color = 'rgb(25,25,25)';
         controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
@@ -125,7 +126,7 @@ function initMap() {
         controlText.style.lineHeight = '38px';
         controlText.style.paddingLeft = '5px';
         controlText.style.paddingRight = '5px';
-        controlText.innerHTML = 'Center Map';
+        controlText.innerHTML = 'User Location';
         controlUI.appendChild(controlText);
 
         controlUI.addEventListener('click', function () {
