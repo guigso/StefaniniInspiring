@@ -3,16 +3,20 @@
 ## Javascript Questão 2:
 
 ### a) No import da api do google maps no index.html, para que servem as tags async e defer?
-R: 
+R: async serve para carregar o script e executa-lo juntamente com o carregamento do conteudo da pagina enquanto o defer carrega o script junto com a página e executa-o apenas após finalizar o carregamento completo da página. Utilizando os dois numa mesma tag faz com que os navegadores que suportam utilizem o método async enquanto os mais antigos que ainda não tem essa funcionalidade utilizam o método do defer.
 
 ### b) Para que serve o parâmetro &callback=initMap na url da api do google maps?
-R: 
+R: O parâmetro callback serve para que a aplicação espere o término da execução de uma função antes de chamar a outra, nesse caso ele espera o carregamento completo da api do google maps para que ele possa chamar a função que inicializa o mapa.
 
 ### c) O que acontece quando removemos o parâmetro &callback=initMap da url da api do google maps? Explique o porque.
-R: 
+R: A api do maps não é completamente carregada para que possa ser inicializado o mapa. 1- Em nenhum outro momento chamamos a função do initMap. 2-Como a api não foi completamente carregada pode ocorrer problemas no tempo de execução, Exemplo: a aplicação executar a inicialização antes de obter todas informações da api.
 
 ### d) Descreva pelo menos uma forma de como podemos fazer com que a aplicação funcione corretamente mesmo sem este parâmetro.
-R: 
+R: Para funcionar sem o callback devemos retirar o async e o defer do import da api para que o conteúdo seja carregado antes de carregar o conteúdo da página, é necessário também adicionar um eventListener no index.js para quando o conteúdo da página for carregado ele chamar a função do initmap.
+Linhas de cógido utilizadas:
+index.html:<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArZ9sCp-_eyhopItaVib_r5nrmwgP-d_c"></script>
+index.js: google.maps.event.addDomListener(window, 'load', initMap);
+
 
 ### e) Explique para que servem as seguintes tags do index.html: 
   `<link rel="manifest" href="manifest.json">
@@ -20,10 +24,13 @@ R:
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">`
 
-R:
+R: <link rel="manifest" href="manifest.json"> serve para carregar uma série de informações a respeito da aplicação como por exemplo:nome,autor,descrição e icones.
+  <meta name="theme-color" content=""> serve pra definir uma cor para o tema no navegador do mobile.
+  <meta name="apple-mobile-web-app-capable" content="yes"> serve para a aplicação rodar em full-screen em dispositivos da apple.
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"> serve para trocar a cor da barra de status em dispositivos da apple.
 
 ### f) Está aplicação pode ser considerada um PWA? Em caso negativo, explique o que falta para que seja.
-R:
+R: Não totalmente, ainda falta algumas funções como a de responder caso o usuário esteja off-line.
 
 
 ## Angular Questão 4:
