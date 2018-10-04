@@ -70,16 +70,20 @@ Ao utilizar elas não precisamos recriar todo o estilo do inicio, podemos utiliz
 ## Angular Questão 6:
 
 ### a) Quais foram os problemas que você identificou?
-R:
+R: import na home.page.ts com nome errado 
+    Função dimissLoading não instanciada na hora de chama-la
+    remoção da função public on init
 
 ### b) Ordene os problemas por ordem de criticidade, ou seja, liste todos os problemas encontrados na ordem de quais deveriam ser corrigidos primeiro em um cenário onde devessemos priorizar as correções.
-R:
+R:1- O import incorreto estava fazendo que a aplicação não fosse compilada.
+  2- A função de retirar o loading da tela não estava funcionando por tanto a aplicação travava no loading e o usuário não seria capaz de utiliza-la
+  3- Remoção do log no console para que o usuário final não veja.
 
 ### c) Justifique a ordem proposta no item anterior em termos de impacto para os usuários e dificuldade para corrigir o problema.
-R: 
+R: Primeiro a aplicação tem que estar compilando normalmente para que possa ser testada antes de apresenta-la ao usuário nesse caso o problema foi apenas um erro de digitação. Após ser executada corretamente a funcionalidade da aplicação estava comprometida por conta de uma função sendo chamada de forma errada onde acabava não realizando o finalizamento da animação de "Carregando...".
 
 ### d) Para que servem os comandos async e await, encontrados na função presentLoading do arquivo home.page.ts?
-R:
+R:Async é para ser carregado juntamente com o conteúdo da página e await serve para ele esperar as funções loadingController.create() e loading.present() darem respostas antes de prosseguir com a execução
 
 ### f) Quais as vantagens de utilizar async/await em códigos javascript/typescript?
 R:
