@@ -11,7 +11,9 @@ export class EditPage {
   constructor() {
 
   }
-  
+  editButton(ev,name) {
+    console.log(ev,name);
+  }
 }
 
 
