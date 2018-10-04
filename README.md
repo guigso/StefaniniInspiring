@@ -36,24 +36,36 @@ R: Não totalmente, ainda falta algumas funções como a de responder caso o usu
 ## Angular Questão 4:
 
 ### a) Para que serve o método ngOnInit, quais são os outros métodos do Angular lifecycle hooks e para que servem?
-R:
+R: Ele é utilizado para realizar funções assim que o componente é Inicializado. 
+ngOnChange = Serve para Executar funções quando algum valor de property-binding é atualizado
+ngDoCheck = Serve para Executar funções a cada ciclo de verificação de mudanças
+ngAfterContentInit = É Executado após inserir conteúdo externo no view
+ngAfterContentChecked =É Executado após verificação do conteúdo inserido
+ngAfterViewInit = Executado após conteúdo na view for carregado
+ngAfterViewChecked = Executado a cada verificação de conteúdo 
+ngOnDestroy =	Executado quando o componente é destruido.
+
 
 ### b) Neste projeto, estamos usando os componentes gráficos da versão 4 da biblioteca gráfica do Ionic. Nesta versão, os componentes são Web Components. Explique o que são Web Components e explique quais são as vantagens deles.
 R: 
 
 ### c) Para que serve a tag ngFor do angular?
-R:
+R: ngFor serve para iterar uma coleçao de dados diretamente na view do component. Qualquer mudança que ocorra nos dados é automaticamente atualizada pelo ngFor.
 
 
 ### d) O que o codigo abaixo representa no arquivo list.page.ts?
 `legends: Array<string> = []`
-R
+R: A declaração de um array do Tipo string com o conteúdo vazio
 
 ### e) Como funciona a api Events do Ionic? Para que serve?
-R: 
+R: A api events do ionic disponibiliza funções que podemos utilizar para observar a mudança dos dados determinados, o events.publisher que propaga a mudança para as funçoes que estiverem escutando utilizando o events.subscribe. Ela serve para que possa trocar conteúdo entre páginas diferentes  
 
 ### f) O que é flexbox? Para que servem as tags ion-grid, ion-row, ion-col? Quais as vantagens em utilizálas?
-R: 
+R: Flexbox é uma parte do css que permite organizar o conteúdo da página de forma que o layout consiga ser visualizado em diversos tamanhos de tela e em diversos dispositivos. as tags já têm estilos pré definidos que auxiliam na hora de criar a página responsiva
+<ion-grid> Define um container para todas rows e columns. 
+<ion-row> Define um grupo de linha horizontal que pode haver diversas colunas dentro.
+<ion-col> Todo conteúdo dentro de um grid deve ficar na tag ion-col. As columns de uma row se adaptam para preencher a row.  
+Ao utilizar elas não precisamos recriar todo o estilo do inicio, podemos utiliza-las e altera-las quando for necessário.
 
 ## Angular Questão 6:
 
