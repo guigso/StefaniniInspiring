@@ -11,13 +11,7 @@ export class EditPage {
   constructor() {
 
   }
-  reorderItems(ev) {
-    let itemToMove = this.legends.splice(ev.detail.from, 1)[0];
-    this.legends.splice(ev.details.to,0,itemToMove);
-  }
-  save(){
-    console.log(this.legends);
-  }
+  
 }
 
 

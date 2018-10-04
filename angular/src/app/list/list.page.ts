@@ -13,5 +13,12 @@ export class ListPage {
   ngOnInit() {
     
   }
+  reorderItems(ev) {
+    let itemToMove = this.legends.splice(ev.detail.from, 1)[0];
+    this.legends.splice(ev.detail.to, 0, itemToMove);
+  }
+  save() {
+    console.log(this.legends);
+  }
 }
 
