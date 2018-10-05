@@ -30,7 +30,7 @@ R: <link rel="manifest" href="manifest.json"> serve para carregar uma série de 
   <meta name="apple-mobile-web-app-status-bar-style" content="black"> serve para trocar a cor da barra de status em dispositivos da apple.
 
 ### f) Está aplicação pode ser considerada um PWA? Em caso negativo, explique o que falta para que seja.
-R: Não totalmente, ainda falta algumas funções como a de responder caso o usuário esteja off-line.
+R: Não totalmente, ainda falta algumas funções como a de responder caso o usuário esteja off-line e os services workers.
 
 
 ## Angular Questão 4:
@@ -47,7 +47,7 @@ ngOnDestroy =	Executado quando o componente é destruido.
 
 
 ### b) Neste projeto, estamos usando os componentes gráficos da versão 4 da biblioteca gráfica do Ionic. Nesta versão, os componentes são Web Components. Explique o que são Web Components e explique quais são as vantagens deles.
-R: 
+R: Web components ajudam na hora de fazer uma determinada função, seja ela funções html,css, ou javascript,  que será repetida diversas vezes em um projeto. Web Components evitam de toda vez que você for fazer um elemento de um framework que você gosta, você precisaria copiar grande partes de código HTML, CSS e JS. Ao ter todos esses códigos separados muitas vezes acaba acarretando em algum problema entre os códigos, gerando retrabalho e outros problemas. A biblioteca gráfica do ionic tem uma série tags que já carregam um pré estilo para o conteúdo da página evitando que você precise fazer todas as declarações de estilo toda vez que for utiliza-lo, podendo editar somente o que você precisa.
 
 ### c) Para que serve a tag ngFor do angular?
 R: ngFor serve para iterar uma coleçao de dados diretamente na view do component. Qualquer mudança que ocorra nos dados é automaticamente atualizada pelo ngFor.
@@ -55,7 +55,7 @@ R: ngFor serve para iterar uma coleçao de dados diretamente na view do componen
 
 ### d) O que o codigo abaixo representa no arquivo list.page.ts?
 `legends: Array<string> = []`
-R: A declaração de um array do Tipo string com o conteúdo vazio
+R: A declaração de um array que receberá conteúdo string, inicializando com conteúdo vazio
 
 ### e) Como funciona a api Events do Ionic? Para que serve?
 R: A api events do ionic disponibiliza funções que podemos utilizar para observar a mudança dos dados determinados, o events.publisher que propaga a mudança para as funçoes que estiverem escutando utilizando o events.subscribe. Ela serve para que possa trocar conteúdo entre páginas diferentes  
@@ -72,7 +72,7 @@ Ao utilizar elas não precisamos recriar todo o estilo do inicio, podemos utiliz
 ### a) Quais foram os problemas que você identificou?
 R: import na home.page.ts com nome errado 
     Função dimissLoading não instanciada na hora de chama-la
-    remoção da função public on init
+    remoção da 'função public on init' que estava sendo printada no console
 
 ### b) Ordene os problemas por ordem de criticidade, ou seja, liste todos os problemas encontrados na ordem de quais deveriam ser corrigidos primeiro em um cenário onde devessemos priorizar as correções.
 R:1- O import incorreto estava fazendo que a aplicação não fosse compilada.
@@ -80,10 +80,10 @@ R:1- O import incorreto estava fazendo que a aplicação não fosse compilada.
   3- Remoção do log no console para que o usuário final não veja.
 
 ### c) Justifique a ordem proposta no item anterior em termos de impacto para os usuários e dificuldade para corrigir o problema.
-R: Primeiro a aplicação tem que estar compilando normalmente para que possa ser testada antes de apresenta-la ao usuário nesse caso o problema foi apenas um erro de digitação. Após ser executada corretamente a funcionalidade da aplicação estava comprometida por conta de uma função sendo chamada de forma errada onde acabava não realizando o finalizamento da animação de "Carregando...".
+R: Primeiro a aplicação tem que estar compilando normalmente para que possa ser testada antes de apresenta-la ao usuário nesse caso o problema foi apenas um erro de digitação. Após ser executada corretamente a funcionalidade da aplicação estava comprometida por conta de uma função sendo chamada de forma errada onde acabava não realizando o finalização da animação de "Carregando...".
 
 ### d) Para que servem os comandos async e await, encontrados na função presentLoading do arquivo home.page.ts?
-R:Async é para ser carregado juntamente com o conteúdo da página e await serve para ele esperar as funções loadingController.create() e loading.present() darem respostas antes de prosseguir com a execução
+R: Uma função async retorna uma promise que representa um valor que pode estar disponível agora, no futuro ou nunca. Juntamente com o await essa função está esperando o resultado da criação do controle de loading para que ele retorne a janela de loading ao usuário. O Await garante que essa promisse será resolvida para poder retomar a execução da função.
 
 ### f) Quais as vantagens de utilizar async/await em códigos javascript/typescript?
-R:
+R: Ao utilizar o async/await temos certeza de que o função await foi executada antes de terminar a função async, garantindo que a promise foi resolvida de forma enxuta, sem uso de callbacks ou catch.
